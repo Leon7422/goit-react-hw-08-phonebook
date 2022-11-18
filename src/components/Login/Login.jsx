@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { Form, Label, Container } from './Login.styled';
+import { login } from 'redux/operations';
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export const Login = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    dispatch(login({ email, password }));
     setEmail('');
     setPassword('');
   };

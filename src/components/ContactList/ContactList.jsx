@@ -11,8 +11,8 @@ export const ContactList = ({ actualData }) => {
           <ContactItem
             key={contact.id}
             id={contact.id}
-            name={contact.userInfo.name}
-            number={contact.userInfo.number}
+            name={contact.name}
+            number={contact.number}
           />
         );
       })}
