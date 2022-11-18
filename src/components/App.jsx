@@ -15,7 +15,6 @@ import { getIsLoading } from 'redux/selectors';
 export const App = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
-  console.log(isLoading);
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
