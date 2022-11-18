@@ -12,6 +12,24 @@ const token = {
   },
 };
 
+export const fetchCurrentUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+
+    if (!persistedToken) {
+      return thunkAPI.rejectWithValue();
+    }
+
+    token.set(persistedToken);
+    try {
+      const { data } = await axios.get('/users/current');
+      return data;
+    } catch (error) {}
+  }
+);
+
 export const register = createAsyncThunk('auth/register', async credentials => {
   try {
     const { data } = await axios.post('/users/signup', credentials);
@@ -62,11 +80,9 @@ export const addContactApi = createAsyncThunk(
 
 export const deleteContactApi = createAsyncThunk(
   'contacts/deleteContact',
-  async (taskId, thunkAPI) => {
+  async (contactId, thunkAPI) => {
     try {
-      const response = await axios.delete(
-        `https://6374b0f248dfab73a4e5d274.mockapi.io/contacts/${taskId}`
-      );
+      const response = await axios.delete(`/contacts/${contactId}`);
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);

@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 
 export const AppBar = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
-  console.log(isLoggedIn);
   return (
     <>
       <AppBarContainer>
